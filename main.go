@@ -1,9 +1,11 @@
 package main
 
 import (
+	"crud-golang/src/controller/routes"
 	"fmt"
 	"log"
 
+	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
 )
 
@@ -21,5 +23,12 @@ func main() {
 
 	port := viper.GetInt("PORT")
 	fmt.Println("PORT:", port)
+
+	router := gin.Default()
+	routes.InitRoutes(&router.RouterGroup)
+
+	if err := router.Run(":8080"); err != nil {
+		log.Fatalf("Error starting server: %v", err)
+	}
 
 }
