@@ -1,5 +1,12 @@
 package controller
 
-import "github.com/gin-gonic/gin"
+import (
+	"crud-golang/src/configuration/rest_err"
 
-func DeleteUserById(c *gin.Context) {}
+	"github.com/gin-gonic/gin"
+)
+
+func DeleteUserById(c *gin.Context) {
+	err := rest_err.NewBadRequestError("Invalid user data")
+	c.JSON(err.Code, err)
+}
